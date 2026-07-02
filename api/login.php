@@ -162,8 +162,13 @@ try {
         ],
     ]);
 
-} catch (PDOException $e) {
-    // Never expose raw PDO error messages — they can leak schema details
-    error_log('[login.php] DB Error: ' . $e->getMessage());
-    Response::error('A server error occurred. Please try again.', 500);
+} catch (Throwable $e) {
+    Response::error(
+        'DEBUG: ' . $e->getMessage(),
+        500,
+        [
+            'file' => basename($e->getFile()),
+            'line' => $e->getLine(),
+        ]
+    );
 }
