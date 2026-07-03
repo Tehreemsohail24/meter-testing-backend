@@ -89,17 +89,10 @@ try {
    $stmt->execute([$username]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// User not found
 if (!$user) {
-    Response::error('User not found', 401);
+    Response::error('Invalid credentials.', 401);
 }
-
-// DEBUG
-Response::success([
-    "user_found" => true,
-    "database_username" => $user['username'],
-    "database_password_hash" => $user['password_hash'],
-    "password_verify_result" => password_verify($password, $user['password_hash'])
-]);
 
     // ── Account status checks ─────────────────────────────────────────────────
     if (!$user['is_active']) {
