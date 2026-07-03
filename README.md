@@ -245,3 +245,4 @@ if (response.statusCode != 200) throw ApiException(response.body);
 | inspections | idx_insp_scope_date | scope_id, inspection_date | BTREE | Report queries |
 | otp_tokens | idx_otp_user_active | user_id, is_used, expires_at | BTREE | OTP verification |
 | user_sessions | uq_session_token | token_hash | UNIQUE | Auth on every request |
+
