@@ -162,12 +162,10 @@ if (!$user) {
     ]);
 
 } catch (Throwable $e) {
+    error_log($e);
+
     Response::error(
-        'DEBUG: ' . $e->getMessage(),
-        500,
-        [
-            'file' => basename($e->getFile()),
-            'line' => $e->getLine(),
-        ]
+        'Internal server error.',
+        500
     );
 }
